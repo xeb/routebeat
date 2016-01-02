@@ -10,8 +10,27 @@ environment:
   GOPATH: c:\gopath
 
 
+# Custom clone folder (variables are not expanded here).
+clone_folder: c:\gopath\src\github.com\xeb\routebeat
+
+
+# Scripts that run after cloning repository
+install:
+  # AppVeyor installed mingw is 32-bit only.
+  - cinst mingw > mingw-install.txt
+  - ps: Push-AppveyorArtifact mingw-install.txt
+  - set PATH=C:\tools\mingw64\bin;%GOROOT%\bin;%PATH%
+  - set PATH=%GOPATH%\bin;%PATH%
+  - set GO15VENDOREXPERIMENT=1
+  - go version
+  - go env
+
 build_script:
   # Compile
   - appveyor AddCompilationMessage "Starting Compile"
   - go build
   - appveyor AddCompilationMessage "Compile Success"
+
+
+# To disable deployment
+deploy: off
