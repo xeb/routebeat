@@ -1,0 +1,17 @@
+# Version format
+version: "{build}"
+
+# Operating system (build VM template)
+os: Windows Server 2012 R2
+
+# Environment variables
+environment:
+  GOROOT: c:\go
+  GOPATH: c:\gopath
+
+
+build_script:
+  # Compile
+  - appveyor AddCompilationMessage "Starting Compile"
+  - go build
+  - appveyor AddCompilationMessage "Compile Success"

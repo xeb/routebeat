@@ -1,12 +1,11 @@
 routebeat
 ========
 
-<a href="https://travis-ci.org/xeb/routebeat">
-<img src="https://api.travis-ci.org/xeb/routebeat.svg?branch=master" />
-</a>
-<a href="https://codecov.io/github/xeb/routebeat?branch=master">
-  <img src="https://codecov.io/github/xeb/routebeat/coverage.svg?branch=master" alt="Coverage via Codecov" />
-</a>
+[![Travis](https://travis-ci.org/xeb/routebeat.svg?branch=master)](https://travis-ci.org/xeb/routebeat)
+[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/8fyw5ysv2xx6qp4g?svg=true)](https://ci.appveyor.com/project/xeb/routebeat)
+[![GoReportCard](http://goreportcard.com/badge/xeb/routebeat)](http://goreportcard.com/report/xeb/routebeat)
+[![codecov.io](https://codecov.io/github/xeb/routebeat/coverage.svg?branch=master)](https://codecov.io/github/xeb/routebeat?branch=master)
+
 
 *For constantly tracing routes*
 
