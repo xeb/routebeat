@@ -28,6 +28,7 @@ install:
 build_script:
   # Compile
   - appveyor AddCompilationMessage "Starting Compile"
+  - go get ./...
   - go build
   - appveyor AddCompilationMessage "Compile Success"
 
