@@ -2,7 +2,6 @@ routebeat
 ========
 
 [![Travis](https://travis-ci.org/xeb/routebeat.svg?branch=master)](https://travis-ci.org/xeb/routebeat)
-[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/8fyw5ysv2xx6qp4g?svg=true)](https://ci.appveyor.com/project/xeb/routebeat)
 [![GoReportCard](http://goreportcard.com/badge/xeb/routebeat)](http://goreportcard.com/report/xeb/routebeat)
 [![codecov.io](https://codecov.io/github/xeb/routebeat/coverage.svg?branch=master)](https://codecov.io/github/xeb/routebeat?branch=master)
 
@@ -28,6 +27,11 @@ By default, only the first route event is published.
 routebeat has the same requirements around the Go environment as
 libbeat, see
 [here](https://github.com/elastic/beats/blob/master/CONTRIBUTING.md#dependencies).
+
+## Supported Platforms
+
+Currently only MacOS X and Linux are supported due to the use of syscall in [github.com/aeden/traceroute](https://github.com/aeden/traceroute)
+
 
 ## Installation
 

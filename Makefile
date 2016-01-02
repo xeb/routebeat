@@ -16,4 +16,7 @@ coverage-report:
 	sudo env GOPATH=`echo ${GOPATH}` go test -coverprofile=${COVERAGE_DIR}/routebeat.cov
 	go tool cover -html=${COVERAGE_DIR}/routebeat.cov -o ${COVERAGE_DIR}/routebeat.html
 
+coverage:
+	sudo env GOPATH=`echo ${GOPATH}` go test -cover
+
 .PHONY: build

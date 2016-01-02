@@ -71,3 +71,29 @@ func TestRouteChangeMiddleHop(t *testing.T) {
 	assert.True(t, len(prevRouteStr) < len(newRouteStr), "Previous route is shorter")
 	assert.Equal(t, diff, "0.0.0.0", "Last part of new route is correct")
 }
+
+func TestRouteChangeReturnsNil(t *testing.T) {
+	rb := &Routebeat{}
+	rb.Init()
+	pv := &Route{
+		hops: []byte{1, 2, 3},
+	}
+	rb.prevRoutes["google.com"] = pv
+
+	nr := &Route{
+		hops: []byte{1, 2, 3},
+	}
+
+	rc := rb.GetRouteChange("google.com", nr)
+	assert.Nil(t, rc)
+}
+
+func TestRouteToStringIsNil(t *testing.T) {
+	route := &Route{
+		hops: []byte{1, 2, 3},
+	}
+	assert.NotNil(t, route)
+	route = nil
+	str := route.String()
+	assert.Equal(t, str, "", "Nil route returns empty string")
+}
