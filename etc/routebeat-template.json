@@ -1,0 +1,135 @@
+{
+    "mappings": {
+        "_default_": {
+            "_all": {
+                "enabled": true,
+                "norms": {
+                    "enabled": false
+                }
+            },
+            "dynamic_templates": [
+                {
+                    "pingbeat_base": {
+                        "mapping": {
+                            "doc_values": true,
+                            "ignore_above": 1024,
+                            "index": "not_analyzed",
+                            "type": "{dynamic_type}"
+                        },
+                        "match": "*"
+                    }
+                }
+            ],
+            "properties": {
+                "@timestamp": {
+                    "type": "date"
+                },
+                "type": {
+                    "type": "string",
+                    "norms": {
+                        "enabled": false
+                    },
+                    "index": "not_analyzed",
+                    "ignore_above": 128
+                },
+                "target": {
+                    "type": "string",
+                    "norms": {
+                        "enabled": false
+                    },
+                    "index": "not_analyzed",
+                    "ignore_above": 256
+                },
+                "destination": {
+                    "type": "string",
+                    "norms": {
+                        "enabled": false
+                    },
+                    "index": "not_analyzed",
+                    "ignore_above": 256
+                },
+                "hop_count": {
+                    "type": "double"
+                },
+                "success_count": {
+                    "type": "double"
+                },
+                "error_count": {
+                    "type": "double"
+                },
+                "success_sum_ms": {
+                    "type": "double"
+                },
+                "error_sum_ms": {
+                    "type": "double"
+                },
+                "success": {
+                    "type": "boolean"
+                },
+                "hop_number": {
+                    "type": "boolean"
+                },
+                "n": {
+                    "type": "boolean"
+                },
+                "duration_ms": {
+                    "type": "boolean"
+                },
+                "ttl": {
+                    "type": "boolean"
+                },
+                "address": {
+                    "type": "string",
+                    "norms": {
+                        "enabled": false
+                    },
+                    "index": "not_analyzed",
+                    "ignore_above": 256
+                },
+                "host": {
+                    "type": "string",
+                    "norms": {
+                        "enabled": false
+                    },
+                    "index": "not_analyzed",
+                    "ignore_above": 256
+                },
+                "prev_route": {
+                    "type": "string",
+                    "norms": {
+                        "enabled": false
+                    },
+                    "index": "not_analyzed",
+                    "ignore_above": 1024
+                },
+                "new_route": {
+                    "type": "string",
+                    "norms": {
+                        "enabled": false
+                    },
+                    "index": "not_analyzed",
+                    "ignore_above": 1024
+                },
+                "prev_duration_ms": {
+                    "type": "double"
+                },
+                "new_duration_ms": {
+                    "type": "double"
+                },
+                "prev_hop_count": {
+                    "type": "double"
+                },
+                "new_hop_count": {
+                    "type": "double"
+                },
+                "change_duration_ms": {
+                    "type": "double"
+                },
+                "change_hop_count": {
+                    "type": "double"
+                }
+            }
+        }
+    },
+    "template": "routebeat-*"
+}

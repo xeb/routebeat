@@ -1,0 +1,7 @@
+routebeat
+*.tmp
+etc/routebeat.yml
+.~lock*
+.#*
+.project
+build/
