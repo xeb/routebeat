@@ -4,6 +4,9 @@ routebeat
 <a href="https://travis-ci.org/xeb/routebeat">
 <img src="https://api.travis-ci.org/xeb/routebeat.svg?branch=master" />
 </a>
+<a href="https://codecov.io/github/xeb/routebeat?branch=master">
+  <img src="https://codecov.io/github/xeb/routebeat/coverage.svg?branch=master" alt="Coverage via Codecov" />
+</a>
 
 *For constantly tracing routes*
 
