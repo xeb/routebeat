@@ -1,0 +1,19 @@
+sudo: required
+dist: trusty
+
+language: go
+
+go:
+  - 1.5.1
+
+os:
+  - linux
+  - osx
+
+script:
+  - make
+  - make coverage-report
+
+
+after_success:
+  - test -f build/coverage/routebeat.cov && bash <(curl -s https://codecov.io/bash) -f build/coverage/routebeat.cov

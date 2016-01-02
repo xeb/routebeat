@@ -1,6 +1,10 @@
 routebeat
 ========
 
+<a href="https://travis-ci.org/xeb/routebeat">
+<img src="https://api.travis-ci.org/xeb/routebeat.svg?branch=master" />
+</a>
+
 *For constantly tracing routes*
 
 routebeat sends ICMP pings to a list of targets to record TCP/IP routing information.  
