@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-const NANO_TO_MS = 1000000
+const nanoToMs = 1000000
 
 // Routebeat struct contains all options and targets to trace
 type Routebeat struct {
@@ -44,7 +44,7 @@ type Route struct {
 	durationMs int64  // total duration in milliseconds
 }
 
-// Used to determine routing changes
+// RouteChange is used to determine routing changes
 type RouteChange struct {
 	prev  *Route
 	new   *Route
@@ -141,8 +141,7 @@ func (r *Routebeat) Config(b *beat.Beat) error {
 	return nil
 }
 
-// Initialize without the context of a Beat
-// This is called within Setup
+// Init initializes without the context of a Beat
 func (r *Routebeat) Init() {
 	r.prevRoutes = make(map[string]*Route)
 }
@@ -157,7 +156,6 @@ func (r *Routebeat) Setup(b *beat.Beat) error {
 
 // Run the main routebeat loop
 func (r *Routebeat) Run(b *beat.Beat) error {
-	var err error
 	ticker := time.NewTicker(r.period)
 	defer ticker.Stop()
 
@@ -178,8 +176,6 @@ func (r *Routebeat) Run(b *beat.Beat) error {
 			}
 		}
 	}
-
-	return err
 }
 
 // Cleanup anything
@@ -187,10 +183,12 @@ func (r *Routebeat) Cleanup(b *beat.Beat) error {
 	return nil
 }
 
+// Stop the beat
 func (r *Routebeat) Stop() {
 	close(r.done)
 }
 
+// TraceAllTargets loops over each target in Routebeat
 func (r *Routebeat) TraceAllTargets() {
 	for _, target := range r.targets {
 		msgs, er := r.TraceTarget(target)
@@ -206,6 +204,7 @@ func (r *Routebeat) TraceAllTargets() {
 	}
 }
 
+// TraceTarget traces a specific target
 func (r *Routebeat) TraceTarget(target string) (msgs []common.MapStr, er error) {
 	msgs = make([]common.MapStr, 0)
 	opt := &traceroute.TracerouteOptions{}
@@ -230,7 +229,7 @@ func (r *Routebeat) TraceTarget(target string) (msgs []common.MapStr, er error) 
 	}
 
 	for i, e := range result.Hops {
-		durationMs := e.ElapsedTime.Nanoseconds() / NANO_TO_MS
+		durationMs := e.ElapsedTime.Nanoseconds() / nanoToMs
 
 		if r.publishHops {
 			add := fmt.Sprintf("%d.%d.%d.%d", e.Address[0], e.Address[1], e.Address[2], e.Address[3])
@@ -292,18 +291,18 @@ func (r *Routebeat) TraceTarget(target string) (msgs []common.MapStr, er error) 
 			"hop_count":      sc + ec,
 			"success_count":  sc,
 			"error_count":    ec,
-			"success_sum_ms": sd / NANO_TO_MS,
-			"error_sum_ms":   ed / NANO_TO_MS,
+			"success_sum_ms": sd / nanoToMs,
+			"error_sum_ms":   ed / nanoToMs,
 			"success":        ec == 0 && sc > 0,
 		}
 
 		// Calculate the average (Elastic will be able to do this aggregation in the future)
 		if sc > 0 {
-			event["success_avg_ms"] = sd / int64(sc) / NANO_TO_MS
+			event["success_avg_ms"] = sd / int64(sc) / nanoToMs
 		}
 
 		if ec > 0 {
-			event["error_avg_ms"] = ed / int64(ec) / NANO_TO_MS
+			event["error_avg_ms"] = ed / int64(ec) / nanoToMs
 		}
 
 		// r.events.PublishEvent(event)
@@ -314,6 +313,7 @@ func (r *Routebeat) TraceTarget(target string) (msgs []common.MapStr, er error) 
 	return
 }
 
+// GetRouteChange returns the event of a route change
 func (r *Routebeat) GetRouteChange(target string, new *Route) *RouteChange {
 	if r.prevRoutes[target] == nil {
 		return nil

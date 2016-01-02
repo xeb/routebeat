@@ -66,7 +66,7 @@ func TestRouteChangeMiddleHop(t *testing.T) {
 	prevRouteStr := fmt.Sprintf("%s", rc.event["prev_route"])
 	newRouteStr := fmt.Sprintf("%s", rc.event["new_route"])
 
-	diff := newRouteStr[len(prevRouteStr)+1 : len(newRouteStr)]
+	diff := newRouteStr[len(prevRouteStr)+1:]
 
 	assert.True(t, len(prevRouteStr) < len(newRouteStr), "Previous route is shorter")
 	assert.Equal(t, diff, "0.0.0.0", "Last part of new route is correct")

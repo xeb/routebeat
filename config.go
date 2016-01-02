@@ -6,6 +6,7 @@ import (
 	"github.com/elastic/libbeat/publisher"
 )
 
+// RouteConfig is a wrapper for config
 type RouteConfig struct {
 	Period         *int64
 	PublishHops    *bool
@@ -18,6 +19,7 @@ type RouteConfig struct {
 	Targets        *[]string
 }
 
+// ConfigSettings is beat config
 type ConfigSettings struct {
 	Input   RouteConfig
 	Output  map[string]outputs.MothershipConfig
@@ -25,4 +27,5 @@ type ConfigSettings struct {
 	Shipper publisher.ShipperConfig
 }
 
+// Config is beat config
 var Config ConfigSettings
